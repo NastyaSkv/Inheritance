@@ -189,7 +189,7 @@ public:
 	}
 
 	//						Constractors:
-	Graduate(STUDENT_TAKE_PARAMETERS, GRADUATE_TAKE_PARAMETERS) :Student(STUDENT_GIVE_PARAMETERS)
+	Graduate(HUMAN_TAKE_PARAMETERS, STUDENT_TAKE_PARAMETERS, GRADUATE_TAKE_PARAMETERS) :Student(HUMAN_GIVE_PARAMETERS, STUDENT_GIVE_PARAMETERS)
 	{
 		set_subject_exam(subject_exam);
 		set_estimation(estimation);
@@ -204,6 +204,7 @@ public:
 	//						Methods:
 	void print()const
 	{
+		Human::print();
 		Student::print();
 		cout << subject_exam << " " << estimation << " " << graduation_work << " " << endl;
 	}
@@ -224,6 +225,6 @@ void main()
 	professor.print();
 	cout << delimiter << endl;
 
-	Graduate grad("Chemistry", "OO_105", 61, 93, "Math", 4, 1);
+	Graduate grad("Montana", "Antoio", 25, "Chemistry", "OO_105", 61, 93, "Math", 4, 1);
 	grad.print();
 }
