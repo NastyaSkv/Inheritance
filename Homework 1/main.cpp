@@ -204,7 +204,7 @@ public:
 	//						Methods:
 	void print()const
 	{
-		Human::print();
+		
 		Student::print();
 		cout << subject_exam << " " << estimation << " " << graduation_work << " " << endl;
 	}
@@ -225,6 +225,6 @@ void main()
 	professor.print();
 	cout << delimiter << endl;
 
-	Graduate grad("Montana", "Antoio", 25, "Chemistry", "OO_105", 61, 93, "Math", 4, 1);
+	Graduate grad("Key", "Jon", 20, "Chemistry", "OO_105", 61, 93, "Math", 4, 1);
 	grad.print();
 }
