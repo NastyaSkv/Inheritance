@@ -167,7 +167,7 @@ public:
 	{
 		return subject_exam;
 	}
-	unsigned int get_estimation()const
+	unsigned int get_estimation()const 
 	{
 		return estimation;
 	}
