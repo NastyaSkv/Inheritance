@@ -204,7 +204,6 @@ public:
 	//						Methods:
 	void print()const
 	{
-		
 		Student::print();
 		cout << subject_exam << " " << estimation << " " << graduation_work << " " << endl;
 	}
