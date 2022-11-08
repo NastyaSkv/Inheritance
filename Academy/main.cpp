@@ -32,13 +32,13 @@ public:
 	{
 		cout << "HConstructor:\t" << this << endl;
 	}
-	~Human()
+	virtual ~Human()
 	{
 		cout << "HDestructor:\t" << this << endl;
 	}
 
 	//						Methods:
-	void print()const
+	virtual void print()const
 	{
 		cout << last_name << " " << first_name << " " << age << " лет.\n";
 	}
@@ -154,9 +154,43 @@ public:
 	}
 };
 
+class Undergrad :public Student
+{
+	std::string topic;
+public:
+	const std::string& get_topic()const
+	{
+		return topic;
+	}
+	void set_topic(const std::string& topic)
+	{
+		this->topic = topic;
+	}
+	//
+	Undergrad(HUMAN_TAKE_PARAMETERS, STUDENT_TAKE_PARAMETERS, const std::string& topic) :
+		Student(HUMAN_GIVE_PARAMETERS, STUDENT_GIVE_PARAMETERS)
+	{
+		set_topic(topic);
+		cout << "GConstructor:\t" << this << endl;
+	}
+	~Undergrad()
+	{
+		cout << "GConstructor:\t" << this << endl;
+	}
+	//
+	void print()const
+	{
+		Student::print();
+		cout << "Тема дипломного проекта: " << topic << endl;
+	}
+};
+
+//#define INHERITANCE
+
 void main()
 {
 	setlocale(LC_ALL, "");
+#ifdef INHERITANCE
 	Human human("Montana", "Antoio", 25);
 	human.print();
 	cout << delimiter << endl;
@@ -167,4 +201,29 @@ void main()
 
 	Teacher professor("White", "Walter", 50, "Chemistry", 20);
 	professor.print();
+	cout << delimiter << endl;
+
+	Undergrad hank("Schreader", "Hank", 40, "Criminalistic", "WW_220", 95, 80, "How to catch Heisenberg");
+	hank.print();
+#endif
+	//Generalisation
+	Human* group[] =
+	{
+	new Student("Pinkman", "Jessie", 25, "Chemistry", "WW_220", 90, 95),
+	new Teacher("White", "Walter", 50, "Chemistry", 20),
+	new Undergrad("Schreader", "Hank", 40, "Criminalistic", "WW_220", 95, 80, "How to catch Heisenberg"),
+	new Student("Vercetti", "Tomas", 30, "Criminalistic", "Vice", 98, 99),
+	new Teacher("Diaz", "Ricardo", 50, "Weapons distribution", 15),
+	new Teacher("Einstein", "Albert", 143, "Astronomy", 120)
+	};   //мы объявили массив указателей на Human
+	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+	{
+		group[i]->print();
+		cout << delimiter << endl;
+	}
+
+	for (int i = 0; i < sizeof(group) / sizeof(group[0]); i++)
+	{
+		delete group[i];
+	}
 }
