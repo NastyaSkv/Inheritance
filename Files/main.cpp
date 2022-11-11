@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 #include<fstream>
 using namespace std;
 
@@ -9,12 +9,12 @@ void main()
 {
 	setlocale(LC_ALL, " ");
 #ifdef WRITE_TO_FILE
-	std::ofstream fout;                   //1) создаем поток
-	//fout.open("File.txt");			  //2) открываем поток
-	fout.open("File.txt", std::ios::app); //std::ios::app - append не переписывать 
-										  //файл,а дописывать в конец файла     
-	fout << "Hello Files" << endl;        //3) пишем в поток
-	fout.close();					      //4) закрываем поток
+	std::ofstream fout;                   //1) СЃРѕР·РґР°РµРј РїРѕС‚РѕРє
+	//fout.open("File.txt");			  //2) РѕС‚РєСЂС‹РІР°РµРј РїРѕС‚РѕРє
+	fout.open("File.txt", std::ios::app); //std::ios::app - append РЅРµ РїРµСЂРµРїРёСЃС‹РІР°С‚СЊ 
+										  //С„Р°Р№Р»,Р° РґРѕРїРёСЃС‹РІР°С‚СЊ РІ РєРѕРЅРµС† С„Р°Р№Р»Р°     
+	fout << "Hello Files" << endl;        //3) РїРёС€РµРј РІ РїРѕС‚РѕРє
+	fout.close();					      //4) Р·Р°РєСЂС‹РІР°РµРј РїРѕС‚РѕРє
 
 	system("notepad File.txt");
 #endif
@@ -22,7 +22,7 @@ void main()
 	ifstream fin("File.txt");
 	if (fin.is_open())
 	{
-		//будем читать файл
+		//Р±СѓРґРµРј С‡РёС‚Р°С‚СЊ С„Р°Р№Р»
 		const int SIZE = 256;
 		char buffer[SIZE] = {};
 		while (!fin.eof())
