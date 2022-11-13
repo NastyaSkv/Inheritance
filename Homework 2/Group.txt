@@ -1,0 +1,6 @@
+Student Pinkman Jessie 25 Chemistry WW_220 90 95
+Teacher White Walter 50 Chemistry 20
+Undergrad Schreader Hank 40 Criminalistic WW_220 95 80 How to catch Heisenberg
+Student Vercetti Tomas 30 Criminalistic Vice 98 99
+Teacher Diaz Ricardo 50 Weapons distribution 15
+Teacher Einstein  Albert 143 Astronomy 120
