@@ -1,5 +1,6 @@
 ﻿//Academy
 #include<iostream>
+#include<fstream>
 #include<string>
 using namespace std;
 
@@ -40,13 +41,33 @@ public:
 	//						Methods:
 	virtual std::ostream& print(std::ostream& os)const
 	{
-		return os << last_name << " " << first_name << " " << age << " лет.\n";
+		return os << last_name << " " << first_name << " " << age << " лет.";
+	}
+	virtual std::ofstream& print(std::ofstream& ofs)const
+	{
+		//	ofs << last_name << " " << first_name << " " << age;
+		ofs.width(20);
+		ofs << std::left;
+		ofs << last_name + " " + first_name;
+		ofs.width(5);
+		ofs << std::right;
+		ofs << age;
+		return ofs;
+	}
+	virtual std::ifstream& scan(std::ifstream& ifs)
+	{
+		ifs >> last_name >> first_name >> age;
+		return ifs;
 	}
 };
 
 std::ostream& operator<<(std::ostream& os, const Human& obj)
 {
 	return obj.print(os);
+}
+std::ofstream& operator<<(std::ofstream& ofs, const Human& obj)
+{
+	return obj.print(ofs);
 }
 
 #define STUDENT_TAKE_PARAMETERS const std::string& specialty, const std::string& group, double rating, double attendance
@@ -109,7 +130,33 @@ public:
 	//						Methods:
 	std::ostream& print(std::ostream& os)const override
 	{
-		return Human::print(os) << specialty << " " << group << " " << rating << " " << attendance << endl;
+		return Human::print(os) << ", " << specialty << " " << group << " " << rating << " " << attendance;
+	}
+	std::ofstream& print(std::ofstream& ofs)const override
+	{
+		Human::print(ofs) << " ";
+		ofs.width(25);
+		ofs << std::left;
+		ofs << specialty;
+		ofs.width(10);
+		ofs << group;
+		ofs.width(8);
+		ofs << std::right;
+		ofs << rating;
+		ofs.width(8);
+		ofs << attendance;
+		return ofs;
+	}
+	std::ifstream& scan(std::ifstream& ifs)override
+	{
+		const int SIZE = 25;
+		char buffer[SIZE]{};
+		ifs.read(buffer, SIZE);
+		specialty = buffer;
+		ifs >> group;
+		ifs >> rating;
+		ifs >> attendance;
+		return ifs;
 	}
 };
 
@@ -153,7 +200,26 @@ public:
 	//						Methods:
 	std::ostream& print(std::ostream& os)const override
 	{
-		return Human::print(os) << specialty << " " << experience << endl;
+		return Human::print(os) << ", " << specialty << " " << experience;
+	}
+	std::ofstream& print(std::ofstream& ofs)const override
+	{
+		Human::print(ofs) << " ";
+		ofs.width(25);
+		ofs << std::left;
+		ofs << specialty;
+		ofs.width(5);
+		ofs << right;
+		ofs << experience;
+		return ofs;
+	}
+	std::ifstream& scan(std::ifstream& ifs)override
+	{
+		const int SIZE = 25;
+		char buffer[SIZE]{};
+		ifs.read(buffer, SIZE);
+		ifs >> experience;
+		return ifs;
 	}
 };
 
@@ -180,12 +246,71 @@ public:
 	{
 		cout << "GConstructor:\t" << this << endl;
 	}
-	//
+	//     Methods
 	std::ostream& print(std::ostream& os)const override
 	{
-		return Student::print(os) << "Тема дипломного проекта: " << topic << endl;
+		return Student::print(os) << ", Тема дипломного проекта : " << topic;
+
+	}
+	std::ofstream& print(std::ofstream& ofs)const override
+	{
+		Student::print(ofs) << " " << topic;
+		return ofs;
+	}
+	std::ifstream& scan(std::ifstream& ifs)override
+	{
+		std::getline(ifs, topic);
+		return ifs;
 	}
 };
+void print(Human* group[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		//group[i]->print();
+		cout << *group[i] << endl;
+		cout << delimiter << endl;
+	}
+}
+void save(Human* group[], const int n, const std::string& filename)
+{
+	//std::string filename = "Group.txt";
+	std::ofstream fout(filename);
+	for (int i = 0; i < n; i++)
+	{
+		fout.width(12);
+		fout << std::left;
+		fout << typeid(*group[i]).name() << ":\t";
+		fout << *group[i] << endl;
+	}
+	fout.close();
+	std::string command = "notepad" + filename;
+	system(command.c_str());
+}
+Human** load(const std::string& filename, int& n)
+{
+	std::ifstream fin(filename);
+	//1) вычисляем размер массива:
+	if (fin.is_open())
+	{
+		std::string buffer;
+		for(n=0; !fin.eof(); n++)
+		{
+	     std::getline(fin, buffer);
+		}
+		n--;
+	}
+	//2) выделяем память под массив
+	Human** group = new Human * [n] {};
+	//3) возвращаемся в начало файла, для того чтобы прочитать строки и загрузить их в объекты
+	fin.clear();
+	fin.seekg(0);
+	//cout << fin.tellg() << endl;
+	
+	//4) загружаем объекты из файла:
+
+	return group;
+}
 
 //#define INHERITANCE
 
@@ -209,7 +334,7 @@ void main()
 	hank.print();
 #endif
 	//Generalisation
-	Human* group[] =
+	/*Human* group[] =
 	{
 	new Student("Pinkman", "Jessie", 25, "Chemistry", "WW_220", 90, 95),
 	new Teacher("White", "Walter", 50, "Chemistry", 20),
@@ -217,13 +342,23 @@ void main()
 	new Student("Vercetti", "Tomas", 30, "Criminalistic", "Vice", 98, 99),
 	new Teacher("Diaz", "Ricardo", 50, "Weapons distribution", 15),
 	new Teacher("Einstein", "Albert", 143, "Astronomy", 120)
-	};   //мы объявили массив указателей на Human
-	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+	}; */    //мы объявили массив указателей на Human
+
+	//std::string filename = "Group.txt";
+	//std::ofstream fout(filename);
+	/*for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
 	{
-		cout << *group[i];
+		cout << *group[i] << endl;
 		cout << delimiter << endl;
-	}
-	
+	}*/
+	//fout.close();
+	//std::string command = "notepad" + filename;
+	//system(command.c_str());
+	//print(group, sizeof(group) / sizeof(group[0]));
+	//save(group, sizeof(group) / sizeof(group[0]), "group.txt");
+	int n = 0;
+	Human** group = load("group.txt", n);
+	print(group, n);
 	for (int i = 0; i < sizeof(group) / sizeof(group[0]); i++)
 	{
 		delete group[i];
