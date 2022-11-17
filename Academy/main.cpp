@@ -11,7 +11,9 @@ using namespace std;
 
 class Human
 {
-	std::string last_name;
+	static const int FULL_NAME_LENGTH=20;
+	static const int AGE_LENGTH=5;
+		std ::string last_name;
 	std::string first_name;
 	unsigned int age;
 public:
@@ -46,10 +48,10 @@ public:
 	virtual std::ofstream& print(std::ofstream& ofs)const
 	{
 		//	ofs << last_name << " " << first_name << " " << age;
-		ofs.width(20);
+		ofs.width(FULL_NAME_LENGTH);
 		ofs << std::left;
 		ofs << last_name + " " + first_name;
-		ofs.width(5);
+		ofs.width(AGE_LENGTH);
 		ofs << std::right;
 		ofs << age;
 		return ofs;
@@ -69,12 +71,21 @@ std::ofstream& operator<<(std::ofstream& ofs, const Human& obj)
 {
 	return obj.print(ofs);
 }
+std::ifstream& operator>>(std::ifstream& ifs, Human& obj)
+{
+	return obj.scan(ifs);
+}
 
 #define STUDENT_TAKE_PARAMETERS const std::string& specialty, const std::string& group, double rating, double attendance
 #define STUDENT_GIVE_PARAMETERS specialty, group, rating, attendance
 
 class Student :public Human
 {
+	static const int SPECIALTY_LENGHT = 25;
+	static const int GROUP_LENGHT = 10;
+	static const int RATING_LENGHT = 8;
+	static const int ATTENDANCE_LENGHT = 8;
+	
 	std::string specialty;
 	std::string group;
 	double rating;
@@ -135,23 +146,29 @@ public:
 	std::ofstream& print(std::ofstream& ofs)const override
 	{
 		Human::print(ofs) << " ";
-		ofs.width(25);
+		ofs.width(SPECIALTY_LENGHT);
 		ofs << std::left;
 		ofs << specialty;
-		ofs.width(10);
+		ofs.width(GROUP_LENGHT);
 		ofs << group;
-		ofs.width(8);
+		ofs.width(RATING_LENGHT);
 		ofs << std::right;
 		ofs << rating;
-		ofs.width(8);
+		ofs.width(ATTENDANCE_LENGHT);
 		ofs << attendance;
 		return ofs;
 	}
 	std::ifstream& scan(std::ifstream& ifs)override
 	{
-		const int SIZE = 25;
+		Human::scan(ifs);
+		const int SIZE = SPECIALTY_LENGHT;
 		char buffer[SIZE]{};
-		ifs.read(buffer, SIZE);
+		ifs.read(buffer, SIZE-1);
+		for (int i = SIZE - 2; buffer[i] == ' '; i--)buffer[i] = 0;
+		while (buffer[0] == ' ')
+		{
+			for (int i = 0; buffer[i]; i++)buffer[i] = buffer[i + 1];
+		}
 		specialty = buffer;
 		ifs >> group;
 		ifs >> rating;
@@ -165,6 +182,8 @@ public:
 
 class Teacher :public Human
 {
+	static const int SPECIALTY_LENGHT = 25;
+	static const int EXPERIENCE_LENGHT = 5;
 	std::string specialty;
 	unsigned int experience;
 public:
@@ -205,19 +224,26 @@ public:
 	std::ofstream& print(std::ofstream& ofs)const override
 	{
 		Human::print(ofs) << " ";
-		ofs.width(25);
+		ofs.width(SPECIALTY_LENGHT);
 		ofs << std::left;
 		ofs << specialty;
-		ofs.width(5);
+		ofs.width(EXPERIENCE_LENGHT);
 		ofs << right;
 		ofs << experience;
 		return ofs;
 	}
 	std::ifstream& scan(std::ifstream& ifs)override
 	{
-		const int SIZE = 25;
+		Human::scan(ifs);
+		const int SIZE = SPECIALTY_LENGHT;
 		char buffer[SIZE]{};
 		ifs.read(buffer, SIZE);
+		for (int i = SIZE - 2; buffer[i] == ' '; i--)buffer[i] = 0;
+		while (buffer[0] == ' ')
+		{
+			for (int i = 0; buffer[i]; i++)buffer[i] = buffer[i] = 0;
+		}
+		specialty = buffer;
 		ifs >> experience;
 		return ifs;
 	}
@@ -259,10 +285,18 @@ public:
 	}
 	std::ifstream& scan(std::ifstream& ifs)override
 	{
+		Student::scan(ifs);
 		std::getline(ifs, topic);
 		return ifs;
 	}
 };
+
+Human* HumanFactory(const std::string& type)
+{
+	if (type.find("Student") != std::string::npos)return new Student("", "", 0, "", "", 0, 0);
+	if (type.find("Undergrad") != std::string::npos)return new Undergrad("", "", 0, "", "", 0, 0,"" );
+	if (type.find("Teacher") != std::string::npos)return new Teacher("", "", 0, "", 0);
+}
 void print(Human* group[], const int n)
 {
 	for (int i = 0; i < n; i++)
@@ -294,9 +328,9 @@ Human** load(const std::string& filename, int& n)
 	if (fin.is_open())
 	{
 		std::string buffer;
-		for(n=0; !fin.eof(); n++)
+		for (n = 0; !fin.eof(); n++)
 		{
-	     std::getline(fin, buffer);
+			std::getline(fin, buffer);
 		}
 		n--;
 	}
@@ -306,9 +340,19 @@ Human** load(const std::string& filename, int& n)
 	fin.clear();
 	fin.seekg(0);
 	//cout << fin.tellg() << endl;
-	
-	//4) загружаем объекты из файла:
 
+	//4) загружаем объекты из файла:
+	if (fin.is_open())
+	{
+		std::string type;
+		for (int i = 0; i < n; i++)
+		{
+			std::getline(fin, type, ':');
+			//cout << buffer << endl;
+			group[i] = HumanFactory(type);
+			fin >> *group[i];
+		}
+	}
 	return group;
 }
 
