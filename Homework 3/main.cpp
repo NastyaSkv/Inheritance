@@ -1,4 +1,6 @@
-﻿#include<iostream>
+﻿//1) Из файла 201 RAW.txt сделать новый файл 201 ready.txt, в котором столбики с IP и MAC адресами поменяны местами
+//2) Из файла 201 RAW.txt сделать новый файл 201.dhcpd, следующего формата
+#include<iostream>
 #include<fstream>
 using std::cout;
 using namespace std;
