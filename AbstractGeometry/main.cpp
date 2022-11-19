@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<Windows.h>
 using namespace std;
 
@@ -25,8 +25,8 @@ namespace Geometry
 		virtual void draw()const = 0;
 		virtual void info()const
 		{
-			cout << "Ïëîùàäü ôèãóðû: " << area() << endl;
-			cout << "Ïåðèìåòð ôèãóðû: " << perimeter() << endl;
+			cout << "ÐŸÐ»Ð¾Ñ‰Ð°Ð´ÑŒ Ñ„Ð¸Ð³ÑƒÑ€Ñ‹: " << area() << endl;
+			cout << "ÐŸÐµÑ€Ð¸Ð¼ÐµÑ‚Ñ€ Ñ„Ð¸Ð³ÑƒÑ€Ñ‹: " << perimeter() << endl;
 			draw();
 		}
 	};
@@ -76,7 +76,7 @@ namespace Geometry
 		void info()const override
 		{
 			cout << typeid(*this).name() << endl;
-			cout << "Äëèíà ñòîðîíû êâàäðàòà: " << side << endl;
+			cout << "Ð”Ð»Ð¸Ð½Ð° ÑÑ‚Ð¾Ñ€Ð¾Ð½Ñ‹ ÐºÐ²Ð°Ð´Ñ€Ð°Ñ‚Ð°: " << side << endl;
 			Shape::info();
 		}
 	};
@@ -132,35 +132,35 @@ namespace Geometry
 				cout << endl;
 			}
 			SetConsoleTextAttribute(hConsole, Color::console_default);*/
-			//1) Ïîëó÷àåì îêíî êîíñîëè
+			//1) ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð¾ÐºÐ½Ð¾ ÐºÐ¾Ð½ÑÐ¾Ð»Ð¸
 			HWND hwnd = GetConsoleWindow();
-			//2) Ïîëó÷àåì êîíòåêñò óñòðîéñòâà äëÿ îêíà êîíñîëè:
-			HDC hdc = GetDC(hwnd);  //ýòî òî, íà ÷åì ìû áóäåì ðèñîâàòü
-			//3) Ñîçäàåì êàðàíäàø - ýòî òî, ÷åì ìû áóäåì ðèñîâàòü
-			//êàðàíäàø ðèñóåò ëèíèè
+			//2) ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð° Ð´Ð»Ñ Ð¾ÐºÐ½Ð° ÐºÐ¾Ð½ÑÐ¾Ð»Ð¸:
+			HDC hdc = GetDC(hwnd);  //ÑÑ‚Ð¾ Ñ‚Ð¾, Ð½Ð° Ñ‡ÐµÐ¼ Ð¼Ñ‹ Ð±ÑƒÐ´ÐµÐ¼ Ñ€Ð¸ÑÐ¾Ð²Ð°Ñ‚ÑŒ
+			//3) Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ ÐºÐ°Ñ€Ð°Ð½Ð´Ð°Ñˆ - ÑÑ‚Ð¾ Ñ‚Ð¾, Ñ‡ÐµÐ¼ Ð¼Ñ‹ Ð±ÑƒÐ´ÐµÐ¼ Ñ€Ð¸ÑÐ¾Ð²Ð°Ñ‚ÑŒ
+			//ÐºÐ°Ñ€Ð°Ð½Ð´Ð°Ñˆ Ñ€Ð¸ÑÑƒÐµÑ‚ Ð»Ð¸Ð½Ð¸Ð¸
 			HPEN hPen = CreatePen(PS_SOLID, 5, color);
-			//4) Ñîçäàåì êèñòü. Êèñòü ðèñóåò çàëèâêó â çàìêíóòîé ôèãóðå
+			//4) Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ ÐºÐ¸ÑÑ‚ÑŒ. ÐšÐ¸ÑÑ‚ÑŒ Ñ€Ð¸ÑÑƒÐµÑ‚ Ð·Ð°Ð»Ð¸Ð²ÐºÑƒ Ð² Ð·Ð°Ð¼ÐºÐ½ÑƒÑ‚Ð¾Ð¹ Ñ„Ð¸Ð³ÑƒÑ€Ðµ
 
 			HBRUSH hBrush = CreateSolidBrush(color);
 
-			//5) Âûáèðàåì ÷åì è íà ÷åì ìû áóäåì ðèñîâàòü:
+			//5) Ð’Ñ‹Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ñ‡ÐµÐ¼ Ð¸ Ð½Ð° Ñ‡ÐµÐ¼ Ð¼Ñ‹ Ð±ÑƒÐ´ÐµÐ¼ Ñ€Ð¸ÑÐ¾Ð²Ð°Ñ‚ÑŒ:
 			SelectObject(hdc, hPen);
 			SelectObject(hdc, hBrush);
 
-			//6) Ðèñóåì ïðÿìîóãîëüíêè:
+			//6) Ð Ð¸ÑÑƒÐµÐ¼ Ð¿Ñ€ÑÐ¼Ð¾ÑƒÐ³Ð¾Ð»ÑŒÐ½ÐºÐ¸:
 			::Rectangle(hdc, 100, 100, 500, 300);
 
-			//Óäàëÿåì êàðàíäàø:
+			//Ð£Ð´Ð°Ð»ÑÐµÐ¼ ÐºÐ°Ñ€Ð°Ð½Ð´Ð°Ñˆ:
 			DeleteObject(hPen);
 
-			//Îñâîáîæäàåì êîíñòåêñò óñòðîéñòâà:
+			//ÐžÑÐ²Ð¾Ð±Ð¾Ð¶Ð´Ð°ÐµÐ¼ ÐºÐ¾Ð½ÑÑ‚ÐµÐºÑÑ‚ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°:
 			ReleaseDC(hwnd, hdc);
 		}
 		void info()const override
 		{
 			cout << typeid(*this).name() << endl;
-			cout << "Øèðèíà:" << width << endl;
-			cout << "Äëèíà:" << length << endl;
+			cout << "Ð¨Ð¸Ñ€Ð¸Ð½Ð°:" << width << endl;
+			cout << "Ð”Ð»Ð¸Ð½Ð°:" << length << endl;
 			Shape::info();
 		}
 	};

@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 using namespace std;
 
 class Animal
@@ -24,7 +24,7 @@ class Lion :public Cat
 public:
 	void sound()const override
 	{
-		cout << "Ùà ÿ òåáÿ ñõàâàþ" << endl;
+		cout << "Ð©Ð° Ñ Ñ‚ÐµÐ±Ñ ÑÑ…Ð°Ð²Ð°ÑŽ" << endl;
 	}
 };
 class Dog :public Animal{};
