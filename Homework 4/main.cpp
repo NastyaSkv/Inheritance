@@ -1,4 +1,5 @@
-//copy AbstractGeometry
+Ôªø//copy AbstractGeometry
+//–í –∏–µ—Ä–∞—Ä—Ö–∏–∏ –≥–µ–æ–º–µ—Ç—Ä–∏—á–µ—Å–∫–∏—Ö —Ñ–∏–≥—É—Ä —Ä–∞—Å—à–∏—Ä–∏—Ç—å –∏–µ—Ä–∞—Ä—Ö–∏—é —Ç—Ä–µ—É–≥–æ–ª—å–Ω–∏–∫–æ–≤ —Ä–∞–≤–Ω–æ–±–µ–¥—Ä–µ–Ω–Ω—ã–º –∏ –ø—Ä—è–º–æ—É–≥–æ–ª—å–Ω—ã–º —Ç—Ä–µ—É–≥–æ–ª—å–Ω–∏–∫–∞–º–∏.
 #define _USE_MATH_DEFINES
 #include<iostream>
 #include<Windows.h>
@@ -8,7 +9,7 @@ namespace Geometry
 {
 	enum Color
 	{
-		red = 0x000000FF,              //alpha Í‡Ì‡Î
+		red = 0x000000FF,              //alpha –∫–∞–Ω–∞–ª
 		green = 0x0000FF00,
 		blue = 0x00FF0000,
 		yellow = 0x0000AAFF,
@@ -70,8 +71,8 @@ namespace Geometry
 		virtual void draw()const = 0;
 		virtual void info()const
 		{
-			cout << "œÎÓ˘‡‰¸ ÙË„Û˚: " << get_area() << endl;
-			cout << "œÂËÏÂÚ ÙË„Û˚: " << get_perimeter() << endl;
+			cout << "–ü–ª–æ—â–∞–¥—å —Ñ–∏–≥—É—Ä—ã: " << get_area() << endl;
+			cout << "–ü–µ—Ä–∏–º–µ—Ç—Ä —Ñ–∏–≥—É—Ä—ã: " << get_perimeter() << endl;
 			draw();
 		}
 	};
@@ -122,7 +123,7 @@ namespace Geometry
 		void info()const override
 		{
 			cout << typeid(*this).name() << endl;
-			cout << "ƒÎËÌ‡ ÒÚÓÓÌ˚ Í‚‡‰‡Ú‡: " << side << endl;
+			cout << "–î–ª–∏–Ω–∞ —Å—Ç–æ—Ä–æ–Ω—ã –∫–≤–∞–¥—Ä–∞—Ç–∞: " << side << endl;
 			Shape::info();
 		}
 	};
@@ -180,39 +181,40 @@ namespace Geometry
 				cout << endl;
 			}
 			SetConsoleTextAttribute(hConsole, Color::console_default);*/
-			//1) œÓÎÛ˜‡ÂÏ ÓÍÌÓ ÍÓÌÒÓÎË
+			//1) –ü–æ–ª—É—á–∞–µ–º –æ–∫–Ω–æ –∫–æ–Ω—Å–æ–ª–∏
 			HWND hwnd = GetConsoleWindow();
-			//2) œÓÎÛ˜‡ÂÏ ÍÓÌÚÂÍÒÚ ÛÒÚÓÈÒÚ‚‡ ‰Îˇ ÓÍÌ‡ ÍÓÌÒÓÎË:
-			HDC hdc = GetDC(hwnd);  //˝ÚÓ ÚÓ, Ì‡ ˜ÂÏ Ï˚ ·Û‰ÂÏ ËÒÓ‚‡Ú¸
-			//3) —ÓÁ‰‡ÂÏ Í‡‡Ì‰‡¯ - ˝ÚÓ ÚÓ, ˜ÂÏ Ï˚ ·Û‰ÂÏ ËÒÓ‚‡Ú¸
-			//Í‡‡Ì‰‡¯ ËÒÛÂÚ ÎËÌËË
+			//2) –ü–æ–ª—É—á–∞–µ–º –∫–æ–Ω—Ç–µ–∫—Å—Ç —É—Å—Ç—Ä–æ–π—Å—Ç–≤–∞ –¥–ª—è –æ–∫–Ω–∞ –∫–æ–Ω—Å–æ–ª–∏:
+			HDC hdc = GetDC(hwnd);  //—ç—Ç–æ —Ç–æ, –Ω–∞ —á–µ–º –º—ã –±—É–¥–µ–º —Ä–∏—Å–æ–≤–∞—Ç—å
+			//3) –°–æ–∑–¥–∞–µ–º –∫–∞—Ä–∞–Ω–¥–∞—à - —ç—Ç–æ —Ç–æ, —á–µ–º –º—ã –±—É–¥–µ–º —Ä–∏—Å–æ–≤–∞—Ç—å
+			//–∫–∞—Ä–∞–Ω–¥–∞—à —Ä–∏—Å—É–µ—Ç –ª–∏–Ω–∏–∏
 			HPEN hPen = CreatePen(PS_SOLID, line_width, color);
-			//4) —ÓÁ‰‡ÂÏ ÍËÒÚ¸.  ËÒÚ¸ ËÒÛÂÚ Á‡ÎË‚ÍÛ ‚ Á‡ÏÍÌÛÚÓÈ ÙË„ÛÂ
+			//4) –°–æ–∑–¥–∞–µ–º –∫–∏—Å—Ç—å. –ö–∏—Å—Ç—å —Ä–∏—Å—É–µ—Ç –∑–∞–ª–∏–≤–∫—É –≤ –∑–∞–º–∫–Ω—É—Ç–æ–π —Ñ–∏–≥—É—Ä–µ
 
 			HBRUSH hBrush = CreateSolidBrush(color);
 
-			//5) ¬˚·Ë‡ÂÏ ˜ÂÏ Ë Ì‡ ˜ÂÏ Ï˚ ·Û‰ÂÏ ËÒÓ‚‡Ú¸:
+			//5) –í—ã–±–∏—Ä–∞–µ–º —á–µ–º –∏ –Ω–∞ —á–µ–º –º—ã –±—É–¥–µ–º —Ä–∏—Å–æ–≤–∞—Ç—å:
 			SelectObject(hdc, hPen);
 			SelectObject(hdc, hBrush);
 
-			//6) –ËÒÛÂÏ ÔˇÏÓÛ„ÓÎ¸ÌÍË:
+			//6) –†–∏—Å—É–µ–º –ø—Ä—è–º–æ—É–≥–æ–ª—å–Ω–∫–∏:
 			::Rectangle(hdc, start_x, start_y, start_x + width, start_y + width);
 
-			//”‰‡ÎˇÂÏ Í‡‡Ì‰‡¯:
+			//–£–¥–∞–ª—è–µ–º –∫–∞—Ä–∞–Ω–¥–∞—à:
 			DeleteObject(hPen);
 			DeleteObject(hBrush);
 
-			//ŒÒ‚Ó·ÓÊ‰‡ÂÏ ÍÓÌÒÚÂÍÒÚ ÛÒÚÓÈÒÚ‚‡:
+			//–û—Å–≤–æ–±–æ–∂–¥–∞–µ–º –∫–æ–Ω—Å—Ç–µ–∫—Å—Ç —É—Å—Ç—Ä–æ–π—Å—Ç–≤–∞:
 			ReleaseDC(hwnd, hdc);
 		}
 		void info()const override
 		{
 			cout << typeid(*this).name() << endl;
-			cout << "ÿËËÌ‡:" << width << endl;
-			cout << "ƒÎËÌ‡:" << length << endl;
+			cout << "–®–∏—Ä–∏–Ω–∞:" << width << endl;
+			cout << "–î–ª–∏–Ω–∞:" << length << endl;
 			Shape::info();
 		}
 	};
+
 	class Circle :public Shape
 	{
 		double radius;
@@ -263,7 +265,8 @@ namespace Geometry
 			Shape::info();
 		}
 	};
-	class Triangle :public Shape
+
+	class Triangle :public Shape    //–≤–∏—Ä—Ç—É–∞–ª—å–Ω—ã–π –∫–ª–∞—Å—Å –¢—Ä–µ—É–≥–æ–ª—å–Ω–∏–∫–∏
 	{
 	public:
 		Triangle(unsigned int start_x, unsigned int start_y, unsigned int line_width, Color color)
@@ -274,8 +277,8 @@ namespace Geometry
 			cout << "Height:\t" << get_height() << endl;
 			Shape::info();
 		}
-	};
-	class EquilateralTriangle :public Triangle
+	};   
+	class EquilateralTriangle :public Triangle   //—Ä–∞–≤–Ω–æ—Å—Ç–æ—Ä–æ–Ω–Ω–∏–π —Ç—Ä–µ—É–≥–æ–ª—å–Ω–∏–∫
 	{
 		double side;
 	public:
@@ -334,16 +337,159 @@ namespace Geometry
 			Triangle::info();
 		}
 	};
+	class IsoscelesTriangle :public Triangle    //—Ä–∞–≤–Ω–æ–±–µ–¥—Ä–µ–Ω–Ω—ã–π —Ç—Ä–µ—É–≥–æ–ª—å–Ω–∏–∫
+	{
+		double side;
+		double footing;
+	public:
+		double get_side()const
+		{
+			return side;
+		}
+		double get_footing()const
+		{
+			return footing;
+		}
+		void set_side(double side)
+		{
+			if (side < 20)side = 100;
+			if (side > 200)side = 600;
+			this->side = side;
+		}
+		void set_footing(double footing)
+		{
+			if (footing < 20)footing = 20;
+			if (footing > 200)footing = 200;
+			this->footing = footing;
+		}
+		IsoscelesTriangle(double side, double footing, unsigned int start_x, unsigned int start_y, unsigned int line_width, Color color)
+			:Triangle(start_x, start_y, line_width, color)
+		{
+			set_side(side);
+			set_footing(footing);
+		}
+		~IsoscelesTriangle() {}
+		double get_height()const override
+		{
+			return sqrt(side * side - footing * footing / 4);
+		}
+		double get_area()const override
+		{
+			return footing * sqrt(side * side - footing * footing / 4) / 2;
+		}
+		double get_perimeter()const override
+		{
+			return side * 2 + footing;
+		}
+		void draw()const override
+		{
+			HWND hwnd = GetConsoleWindow();
+			HDC hdc = GetDC(hwnd);
+			HPEN hPen = CreatePen(PS_SOLID, line_width, color);
+			HBRUSH hBrush = CreateSolidBrush(color);
+			SelectObject(hdc, hPen);
+			SelectObject(hdc, hBrush);
 
+			POINT vert[] =
+			{
+				{start_x, start_y + side},
+				{start_x + footing, start_y + side},
+				{start_x + footing / 2, start_y + side - get_height()},
+			};
+			::Polygon(hdc, vert, 3);
+			DeleteObject(hBrush);
+			DeleteObject(hPen);
+			ReleaseDC(hwnd, hdc);
+		}
+		void info()const
+		{
+			cout << typeid(*this).name() << endl;
+			cout << "Side:\t" << side << endl;
+			cout << "Footing:\t" << footing << endl;
+			Triangle::info();
+		}
+	};
+	class RectangularTriangle :public Triangle    //–ø—Ä—è–º–æ—É–≥–æ–ª—å–Ω—ã–π —Ç—Ä–µ—É–≥–æ–ª—å–Ω–∏–∫
+	{
+		double catheter_1;
+		double catheter_2;
+	public:
+		double get_catheter_1()const
+		{
+			return catheter_1;
+		}
+		double get_catheter_2()const
+		{
+			return catheter_2;
+		}
+		void set_catheter_1(double catheter_1)
+		{
+			if (catheter_1 < 20)catheter_1 = 100;
+			if (catheter_1 > 200)catheter_1 = 600;
+			this->catheter_1 = catheter_1;
+		}
+		void set_catheter_2(double catheter_2)
+		{
+			if (catheter_2 < 20)catheter_2 = 200;
+			if (catheter_2 > 200)catheter_2 = 800;
+			this->catheter_2 = catheter_2;
+		}
+		RectangularTriangle(double catheter_1, double catheter_2, unsigned int start_x, unsigned int start_y, unsigned int line_width, Color color)
+			:Triangle(start_x, start_y, line_width, color)
+		{
+			set_catheter_1(catheter_1);
+			set_catheter_2(catheter_2);
+		}
+		~RectangularTriangle() {}
+		double get_height()const override
+		{
+			return catheter_1 * catheter_2 / sqrt(catheter_1 * catheter_1 + catheter_2 * catheter_2);
+		}
+		double get_area()const override
+		{
+			return catheter_1 * catheter_2 / 2;
+		}
+		double get_perimeter()const override
+		{
+			return catheter_1 + catheter_2 + sqrt(catheter_1 * catheter_1 + catheter_2 * catheter_2);
+		}
+		void draw()const override
+		{
+			HWND hwnd = GetConsoleWindow();
+			HDC hdc = GetDC(hwnd);
+			HPEN hPen = CreatePen(PS_SOLID, line_width, color);
+			HBRUSH hBrush = CreateSolidBrush(color);
+			SelectObject(hdc, hPen);
+			SelectObject(hdc, hBrush);
+
+			POINT vert[] =
+			{
+				{start_x, start_y + catheter_2},
+				{start_x + catheter_1, start_y + catheter_2},
+				{start_x, start_y},
+			};
+			::Polygon(hdc, vert, 3);
+			DeleteObject(hBrush);
+			DeleteObject(hPen);
+			ReleaseDC(hwnd, hdc);
+		}
+		void info()const
+		{
+			cout << typeid(*this).name() << endl;
+			cout << "catheter_1:\t" << catheter_1 << endl;
+			cout << "catheter_2:\t" << catheter_2 << endl;
+			cout << "hypotenuse:\t" << sqrt(catheter_1 * catheter_1 + catheter_2 * catheter_2) << endl;
+			Triangle::info();
+		}
+	};
 }
 
 void main()
 {
 	setlocale(LC_ALL, "");
 	//Shape shape;
-	Geometry::Square square(8, 100, 100, 11, Geometry::Color::console_red);
+	Geometry::Square square(6, 900, 200, 11, Geometry::Color::console_red);
 	square.info();
-
 
 	Geometry::Rectangle rect(150, 70, 300, 100, 11, Geometry::Color::grey);
 	rect.info();
@@ -351,7 +497,13 @@ void main()
 	Geometry::Circle circle(100, 500, 100, 11, Geometry::Color::yellow);
 	circle.info();
 
-	Geometry::EquilateralTriangle e_try(170, 350, 200, 15, Geometry::Color::green);
+	Geometry::EquilateralTriangle e_try(170, 350, 300, 15, Geometry::Color::green);
 	e_try.info();
+
+	Geometry::IsoscelesTriangle i_try(200, 50, 600, 400, 10, Geometry::Color::blue);
+	i_try.info();
+
+	Geometry::RectangularTriangle rec_try(16, 15, 700, 350, 10, Geometry::Color::white);
+	rec_try.info();
 
 }

@@ -348,6 +348,6 @@ void main()
 	Geometry::Circle circle(100, 500, 100, 11, Geometry::Color::yellow);
 	circle.info();
 
-	Geometry::EquilateralTriangle e_try(170, 350, 200, 15, Geometry::Color::green);
+	Geometry::EquilateralTriangle e_try(170, 350, 200, 15, 5, Geometry::Color::green);
 	e_try.info();
 }
