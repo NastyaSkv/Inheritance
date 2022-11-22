@@ -1,4 +1,5 @@
-Ôªø#define _USE_MATH_DEFINES
+//copy AbstractGeometry
+#define _USE_MATH_DEFINES
 #include<iostream>
 #include<Windows.h>
 using namespace std;
@@ -7,7 +8,7 @@ namespace Geometry
 {
 	enum Color
 	{
-		red = 0x000000FF,              //alpha –∫–∞–Ω–∞–ª
+		red = 0x000000FF,              //alpha Í‡Ì‡Î
 		green = 0x0000FF00,
 		blue = 0x00FF0000,
 		yellow = 0x0000AAFF,
@@ -69,8 +70,8 @@ namespace Geometry
 		virtual void draw()const = 0;
 		virtual void info()const
 		{
-			cout << "–ü–ª–æ—â–∞–¥—å —Ñ–∏–≥—É—Ä—ã: " << get_area() << endl;
-			cout << "–ü–µ—Ä–∏–º–µ—Ç—Ä —Ñ–∏–≥—É—Ä—ã: " << get_perimeter() << endl;
+			cout << "œÎÓ˘‡‰¸ ÙË„Û˚: " << get_area() << endl;
+			cout << "œÂËÏÂÚ ÙË„Û˚: " << get_perimeter() << endl;
 			draw();
 		}
 	};
@@ -121,7 +122,7 @@ namespace Geometry
 		void info()const override
 		{
 			cout << typeid(*this).name() << endl;
-			cout << "–î–ª–∏–Ω–∞ —Å—Ç–æ—Ä–æ–Ω—ã –∫–≤–∞–¥—Ä–∞—Ç–∞: " << side << endl;
+			cout << "ƒÎËÌ‡ ÒÚÓÓÌ˚ Í‚‡‰‡Ú‡: " << side << endl;
 			Shape::info();
 		}
 	};
@@ -179,36 +180,36 @@ namespace Geometry
 				cout << endl;
 			}
 			SetConsoleTextAttribute(hConsole, Color::console_default);*/
-			//1) –ü–æ–ª—É—á–∞–µ–º –æ–∫–Ω–æ –∫–æ–Ω—Å–æ–ª–∏
+			//1) œÓÎÛ˜‡ÂÏ ÓÍÌÓ ÍÓÌÒÓÎË
 			HWND hwnd = GetConsoleWindow();
-			//2) –ü–æ–ª—É—á–∞–µ–º –∫–æ–Ω—Ç–µ–∫—Å—Ç —É—Å—Ç—Ä–æ–π—Å—Ç–≤–∞ –¥–ª—è –æ–∫–Ω–∞ –∫–æ–Ω—Å–æ–ª–∏:
-			HDC hdc = GetDC(hwnd);  //—ç—Ç–æ —Ç–æ, –Ω–∞ —á–µ–º –º—ã –±—É–¥–µ–º —Ä–∏—Å–æ–≤–∞—Ç—å
-			//3) –°–æ–∑–¥–∞–µ–º –∫–∞—Ä–∞–Ω–¥–∞—à - —ç—Ç–æ —Ç–æ, —á–µ–º –º—ã –±—É–¥–µ–º —Ä–∏—Å–æ–≤–∞—Ç—å
-			//–∫–∞—Ä–∞–Ω–¥–∞—à —Ä–∏—Å—É–µ—Ç –ª–∏–Ω–∏–∏
+			//2) œÓÎÛ˜‡ÂÏ ÍÓÌÚÂÍÒÚ ÛÒÚÓÈÒÚ‚‡ ‰Îˇ ÓÍÌ‡ ÍÓÌÒÓÎË:
+			HDC hdc = GetDC(hwnd);  //˝ÚÓ ÚÓ, Ì‡ ˜ÂÏ Ï˚ ·Û‰ÂÏ ËÒÓ‚‡Ú¸
+			//3) —ÓÁ‰‡ÂÏ Í‡‡Ì‰‡¯ - ˝ÚÓ ÚÓ, ˜ÂÏ Ï˚ ·Û‰ÂÏ ËÒÓ‚‡Ú¸
+			//Í‡‡Ì‰‡¯ ËÒÛÂÚ ÎËÌËË
 			HPEN hPen = CreatePen(PS_SOLID, line_width, color);
-			//4) –°–æ–∑–¥–∞–µ–º –∫–∏—Å—Ç—å. –ö–∏—Å—Ç—å —Ä–∏—Å—É–µ—Ç –∑–∞–ª–∏–≤–∫—É –≤ –∑–∞–º–∫–Ω—É—Ç–æ–π —Ñ–∏–≥—É—Ä–µ
+			//4) —ÓÁ‰‡ÂÏ ÍËÒÚ¸.  ËÒÚ¸ ËÒÛÂÚ Á‡ÎË‚ÍÛ ‚ Á‡ÏÍÌÛÚÓÈ ÙË„ÛÂ
 
 			HBRUSH hBrush = CreateSolidBrush(color);
 
-			//5) –í—ã–±–∏—Ä–∞–µ–º —á–µ–º –∏ –Ω–∞ —á–µ–º –º—ã –±—É–¥–µ–º —Ä–∏—Å–æ–≤–∞—Ç—å:
+			//5) ¬˚·Ë‡ÂÏ ˜ÂÏ Ë Ì‡ ˜ÂÏ Ï˚ ·Û‰ÂÏ ËÒÓ‚‡Ú¸:
 			SelectObject(hdc, hPen);
 			SelectObject(hdc, hBrush);
 
-			//6) –†–∏—Å—É–µ–º –ø—Ä—è–º–æ—É–≥–æ–ª—å–Ω–∫–∏:
+			//6) –ËÒÛÂÏ ÔˇÏÓÛ„ÓÎ¸ÌÍË:
 			::Rectangle(hdc, start_x, start_y, start_x + width, start_y + width);
 
-			//–£–¥–∞–ª—è–µ–º –∫–∞—Ä–∞–Ω–¥–∞—à:
+			//”‰‡ÎˇÂÏ Í‡‡Ì‰‡¯:
 			DeleteObject(hPen);
 			DeleteObject(hBrush);
 
-			//–û—Å–≤–æ–±–æ–∂–¥–∞–µ–º –∫–æ–Ω—Å—Ç–µ–∫—Å—Ç —É—Å—Ç—Ä–æ–π—Å—Ç–≤–∞:
+			//ŒÒ‚Ó·ÓÊ‰‡ÂÏ ÍÓÌÒÚÂÍÒÚ ÛÒÚÓÈÒÚ‚‡:
 			ReleaseDC(hwnd, hdc);
 		}
 		void info()const override
 		{
 			cout << typeid(*this).name() << endl;
-			cout << "–®–∏—Ä–∏–Ω–∞:" << width << endl;
-			cout << "–î–ª–∏–Ω–∞:" << length << endl;
+			cout << "ÿËËÌ‡:" << width << endl;
+			cout << "ƒÎËÌ‡:" << length << endl;
 			Shape::info();
 		}
 	};
@@ -333,6 +334,7 @@ namespace Geometry
 			Triangle::info();
 		}
 	};
+
 }
 
 void main()
@@ -342,6 +344,7 @@ void main()
 	Geometry::Square square(8, 100, 100, 11, Geometry::Color::console_red);
 	square.info();
 
+
 	Geometry::Rectangle rect(150, 70, 300, 100, 11, Geometry::Color::grey);
 	rect.info();
 
@@ -350,4 +353,5 @@ void main()
 
 	Geometry::EquilateralTriangle e_try(170, 350, 200, 15, Geometry::Color::green);
 	e_try.info();
+
 }
