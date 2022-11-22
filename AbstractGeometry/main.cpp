@@ -80,6 +80,7 @@ namespace Geometry
 			Shape::info();
 		}
 	};
+
 	class Rectangle :public Shape
 	{
 		double width;
@@ -164,6 +165,161 @@ namespace Geometry
 			Shape::info();
 		}
 	};
+
+	class Triangle :public Shape
+	{
+		double a_x;
+		double a_y;
+		double b_x;
+		double b_y;
+		double c_x;
+		double c_y;
+		int size;
+
+	public:
+		double get_a_x()const
+		{
+			return a_x;
+		}	
+		double get_a_y()const
+		{
+			return a_y;
+		}	
+		double get_b_x()const
+		{
+			return b_x;
+		}	
+		double get_b_y()const
+		{
+			return b_y;
+		}
+		double get_c_x()const
+		{
+			return c_x;
+		}
+		double get_c_y()const
+		{
+			return c_y;
+		}	
+		int get_size()const
+		{
+			return size;
+		}	
+		void set_a_x(double a_x)
+		{
+			if (a_x < 3)a_x = 100;
+			if (a_x > 300)a_x = 20;
+			this->a_x = a_x;
+		}
+		void set_a_y(double a_y)
+		{
+			if (a_y < 3)a_y = 100;
+			if (a_y > 300)a_y = 30;
+			this->a_y = a_y;
+		}
+		void set_b_x(double b_x)
+		{
+			if (b_x < 3)b_x = 50;
+			if (b_x > 300)b_x = 10;
+			this->b_x = b_x;
+		}
+		void set_b_y(double b_y)
+		{
+			if (b_y < 3)b_y = 50;
+			if (b_y > 300)b_y = 15;
+			this->b_y = b_y;
+		}
+		void set_c_x(double c_x)
+		{
+			if (c_x < 3)c_x = 60;
+			if (c_x > 300)c_x = 18;
+			this->c_x = c_x;
+		}
+		void set_c_y(double c_y)
+		{
+			if (c_y < 3)c_y = 10;
+			if (c_y > 300)c_y = 35;
+			this->c_y = c_y;
+		}
+
+		void set_size(int size)
+		{
+			if (size < 7)size = 3;
+			if (size > 300)size = 10;
+			this->size = size;
+		}
+		Triangle(double a_x, double a_y, double b_x, double b_y, double c_x, double c_y, int size, Color color) :Shape(color)
+		{
+			set_a_x(a_x);
+			set_a_y(a_y);
+			set_b_x(b_x);
+			set_b_y(b_y);
+			set_c_x(c_x);
+			set_c_y(c_y);
+			set_size(size);
+		}
+		~Triangle() {}
+		double area()const override //формула Герона
+		{
+			//double p = (side_1 + side_2 + side_3) / 2;
+			double p = 5 / 2;
+			//return sqrt(p*(p- side_1)* (p - side_2)* (p - side_3));
+			return sqrt(4);
+		}
+		double perimeter()const override
+		{
+			//return side_1 + side_2 + side_3;
+			return 3;
+		}
+		void draw()const
+		{
+			//+
+			/*HWND hwnd = GetConsoleWindow();
+			HDC hdc = GetDC(hwnd);
+			
+			HPEN hPen = CreatePen(PS_SOLID, 5, color);
+
+			HBRUSH hBrush = CreateSolidBrush(color);*/
+
+			//SelectObject(hdc, hPen);
+			//SelectObject(hdc, hBrush);
+			/*
+			//::Rectangle(hdc, 100, 100, 500, 300);
+			MoveToEx(hdc, x, y-size, NULL);
+			LineTo(hdc, x+size, y+size);
+			LineTo(hdc, x-size, y+size);
+			LineTo(hdc, x, y-size);
+			DeleteObject(hPen);
+			ReleaseDC(hwnd, hdc);*/
+		
+		
+			HWND hwnd = GetConsoleWindow();
+			HDC hdc = GetDC(hwnd);  
+			HPEN hPen = CreatePen(PS_SOLID, 5, color);
+			HBRUSH hBrush = CreateSolidBrush(color);
+
+			//5) Выбираем чем и на чем мы будем рисовать:
+			SelectObject(hdc, hPen);
+			SelectObject(hdc, hBrush);
+
+			Polygon(hdc,Triangle, int size);
+
+			DeleteObject(hPen);
+			ReleaseDC(hwnd, hdc);
+		}
+		void info()const override
+		{
+			cout << typeid(*this).name() << endl;
+			cout << "ax: " << a_x << endl;
+			cout << "ay: " << a_y<< endl;
+			cout << "bx: " << b_x << endl;
+			cout << "by: " << b_y << endl;
+			cout << "cx: " << c_x << endl;
+			cout << "cy: " << c_y << endl;
+			cout << "Введите количество углов" << size << endl;
+			Shape::info();
+		}
+	};
 }
 
 void main()
@@ -175,4 +331,7 @@ void main()
 
 	Geometry::Rectangle rect(15, 7, Geometry::Color::console_yellow);
 	rect.info();
+
+	Geometry::Triangle tri(1,2, 2,1, 2, 3, 3, Geometry::Color::console_green);
+	tri.info();
 }
